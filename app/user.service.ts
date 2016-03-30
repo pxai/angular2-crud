@@ -1,5 +1,7 @@
 import {Http} from "angular2/http";
 import "rxjs/add/operator/map";
+import {User} from "./user.ts";
+
 /**
 * http gets injected through the constructor argument
 *
@@ -19,8 +21,8 @@ export class UserService {
       .map(result => result.json());
     }
 
-  public save() {
-    this.http.put("http://localhost:3000/api/user/save","");
+  public save(user: User) {
+    this.http.post("http://localhost:3000/api/user/save", user);
   }
 
   public update() {
