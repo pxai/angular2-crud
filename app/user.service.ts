@@ -22,7 +22,8 @@ export class UserService {
     }
 
   public save(user: User) {
-    this.http.post("http://localhost:3000/api/user/save", user);
+    var headers = {contentType: 'application/json'};
+    this.http.post("http://localhost:3000/api/user/save", JSON.stringify(user), headers);
   }
 
   public update() {
