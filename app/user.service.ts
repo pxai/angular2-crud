@@ -8,6 +8,7 @@ import {User} from "./user.ts";
 */
 export class UserService {
   private http: Http;
+  
   constructor (http: Http) {
     this.http = http;
   }
