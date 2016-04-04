@@ -21,8 +21,9 @@ System.register(["rxjs/add/operator/map"], function(exports_1, context_1) {
                     return this.http.get("http://localhost:3000/api/users/")
                         .map(function (result) { return result.json(); });
                 };
-                UserService.prototype.save = function () {
-                    this.http.put("http://localhost:3000/api/user/save", "");
+                UserService.prototype.save = function (user) {
+                    var headers = { contentType: 'application/json' };
+                    this.http.post("http://localhost:3000/api/user/save", JSON.stringify(user), headers);
                 };
                 UserService.prototype.update = function () {
                     this.http.put("http://localhost:3000/api/user/update", "");
