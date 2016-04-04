@@ -2,6 +2,7 @@
 ## What's this
 Simple example of Angular2 app set up for a console-based environment
 In this case to show the crud operations
+Not working yet, but in progress ;)
 
 ## Install
 Clone the repository
