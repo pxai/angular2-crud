@@ -4,6 +4,8 @@ Simple example of Angular2 app set up for a console-based environment
 In this case to show the crud operations
 Not working yet, but in progress ;)
 
+Check official angular2 project for reference:
+Officla angular2 [https://angular.io/docs/ts/latest/tutorial/]
 ## Install
 Clone the repository
 ```
