@@ -5,3 +5,7 @@
 .ng-touched.ng-invalid {
     background-color: lightsalmon;
 }
+
+.selected {
+    background-color: cadetblue;
+}
