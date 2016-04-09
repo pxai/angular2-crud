@@ -2,6 +2,7 @@ import {Component} from "angular2/core";
 import {Task} from "./task";
 
 /**
+ * Changes in stage 2 - hero editor
 * Using a service to take care of the server interaction
 */
 @Component({

@@ -19,6 +19,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             }],
         execute: function() {
             /**
+             * Changes in stage 2 - hero editor
             * Using a service to take care of the server interaction
             */
             TodoComponent = (function () {
