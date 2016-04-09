@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './httpsample.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './httpsample.component', './todo.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './httpsample.component'], 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, httpsample_component_1;
+    var core_1, router_1, httpsample_component_1, todo_component_1;
     var AppComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', './httpsample.component'], 
             },
             function (httpsample_component_1_1) {
                 httpsample_component_1 = httpsample_component_1_1;
+            },
+            function (todo_component_1_1) {
+                todo_component_1 = todo_component_1_1;
             }],
         execute: function() {
             /**
@@ -37,10 +40,11 @@ System.register(['angular2/core', 'angular2/router', './httpsample.component'], 
                     core_1.Component({
                         selector: 'server-app',
                         directives: [router_1.ROUTER_DIRECTIVES],
-                        template: "<h1>{{title}}</h1>\n                <nav>\n                <ul>\n                     <li><a [routerLink]=\"['HttpSample']\">Http Sample</a></li>\n                </ul>\n                </nav>\n                <router-outlet></router-outlet>"
+                        template: "<h1>{{title}}</h1>\n                <nav>\n                <ul>\n                     <li><a [routerLink]=\"['HttpSample']\">Http Sample</a></li>\n                     <li><a [routerLink]=\"['TodoComponent']\">Todo sample</a></li>\n                </ul>\n                </nav>\n                <router-outlet></router-outlet>"
                     }),
                     router_1.RouteConfig([
-                        { path: '/httpsample', name: 'HttpSample', component: httpsample_component_1.HttpSampleComponent }
+                        { path: '/httpsample', name: 'HttpSample', component: httpsample_component_1.HttpSampleComponent },
+                        { path: '/todocomponent', name: 'TodoComponent', component: todo_component_1.TodoComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
