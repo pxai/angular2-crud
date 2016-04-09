@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./todo-detail.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "./todo-detail.component", "./todo-edit.component", './todo.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(["angular2/core", "./todo-detail.component"], function(exports_1
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, todo_detail_component_1;
-    var TodoComponent, TASKS;
+    var core_1, todo_detail_component_1, todo_edit_component_1, todo_service_1;
+    var TodoComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -19,6 +19,12 @@ System.register(["angular2/core", "./todo-detail.component"], function(exports_1
             },
             function (todo_detail_component_1_1) {
                 todo_detail_component_1 = todo_detail_component_1_1;
+            },
+            function (todo_edit_component_1_1) {
+                todo_edit_component_1 = todo_edit_component_1_1;
+            },
+            function (todo_service_1_1) {
+                todo_service_1 = todo_service_1_1;
             }],
         execute: function() {
             /**
@@ -26,9 +32,16 @@ System.register(["angular2/core", "./todo-detail.component"], function(exports_1
             * Using a service to take care of the server interaction
             */
             TodoComponent = (function () {
-                function TodoComponent() {
-                    this.tasks = TASKS;
+                function TodoComponent(todoService) {
+                    this._todoService = todoService;
                 }
+                TodoComponent.prototype.getTasks = function () {
+                    var _this = this;
+                    this._todoService.getTasks().then(function (tasks) { return _this.tasks = tasks; });
+                };
+                TodoComponent.prototype.ngOnInit = function () {
+                    this.getTasks();
+                };
                 TodoComponent.prototype.edit = function (task) {
                     console.log("Task selected: " + task);
                     this.selectedTask = null;
@@ -50,19 +63,17 @@ System.register(["angular2/core", "./todo-detail.component"], function(exports_1
                 TodoComponent = __decorate([
                     core_1.Component({
                         selector: "todo",
-                        template: "<h1>Todo tasks app</h1>\n                <div *ngIf=\"editTask\">\n                    <h2>Edit</h2>\n                    <div>Id: {{editTask.id}}</div>\n                    <div><label>Task: </label></div>\n                    <div><input [(ngModel)]=\"editTask.name\" placeholder=\"Task name\"></div>\n                    <div><label for=\"done\">Done: </label></div>\n                    <div><input type=\"checkbox\" [(ngModel)]=\"editTask.done\" ></div>\n                    <button (onclick)=\"update(editTask)\">Save</button>\n                </div>\n                <todo-detail [task]=\"selectedTask\"></todo-detail>        \n                <h2>My Tasks</h2>\n                <ul class=\"tasks\">\n                <li *ngFor=\"#task of tasks\" [class.selected]=\"task === selectedTask\">\n                    <span (click)=\"edit(task)\"><strong>{{task.name}}</strong> {{task.done}}</span>\n                    <button (click)=\"detail(task)\">Detail</button>\n                    <button (click)=\"edit(task)\">Edit</button>\n                </li>\n                </ul>\n                ",
-                        directives: [todo_detail_component_1.TodoDetailComponent]
+                        template: "<h1>Todo tasks app</h1>\n\n                <todo-detail [task]=\"selectedTask\"></todo-detail>        \n                <todo-edit [task]=\"editTask\"></todo-edit>        \n                <h2>My Tasks</h2>\n                <ul class=\"tasks\">\n                <li *ngFor=\"#task of tasks\" [class.selected]=\"task === selectedTask\">\n                    <span (click)=\"edit(task)\"><strong>{{task.name}}</strong> {{task.done}}</span>\n                    <button (click)=\"detail(task)\">Detail</button>\n                    <button (click)=\"edit(task)\">Edit</button>\n                </li>\n                </ul>\n                ",
+                        // Other directives, injected
+                        directives: [todo_detail_component_1.TodoDetailComponent, todo_edit_component_1.TodoEditComponent],
+                        // Used services, Injected 
+                        providers: [todo_service_1.TodoService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [todo_service_1.TodoService])
                 ], TodoComponent);
                 return TodoComponent;
             }());
             exports_1("TodoComponent", TodoComponent);
-            TASKS = [
-                { id: 1, name: 'Finish this sample', done: false },
-                { id: 2, name: 'Prepare meal', done: false },
-                { id: 3, name: 'Play with Josu', done: false },
-            ];
         }
     }
 });

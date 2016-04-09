@@ -1,6 +1,9 @@
 import {Component} from "angular2/core";
+import {OnInit} from 'angular2/core'; // Part of the lifecycle hook
 import {Task} from "./task";
 import {TodoDetailComponent} from "./todo-detail.component";
+import {TodoEditComponent} from "./todo-edit.component";
+import {TodoService} from './todo.service';
 
 /**
  * Changes in stage 2 - hero editor
@@ -9,16 +12,9 @@ import {TodoDetailComponent} from "./todo-detail.component";
 @Component({
     selector: "todo",
     template: `<h1>Todo tasks app</h1>
-                <div *ngIf="editTask">
-                    <h2>Edit</h2>
-                    <div>Id: {{editTask.id}}</div>
-                    <div><label>Task: </label></div>
-                    <div><input [(ngModel)]="editTask.name" placeholder="Task name"></div>
-                    <div><label for="done">Done: </label></div>
-                    <div><input type="checkbox" [(ngModel)]="editTask.done" ></div>
-                    <button (onclick)="update(editTask)">Save</button>
-                </div>
+
                 <todo-detail [task]="selectedTask"></todo-detail>        
+                <todo-edit [task]="editTask"></todo-edit>        
                 <h2>My Tasks</h2>
                 <ul class="tasks">
                 <li *ngFor="#task of tasks" [class.selected]="task === selectedTask">
@@ -28,12 +24,28 @@ import {TodoDetailComponent} from "./todo-detail.component";
                 </li>
                 </ul>
                 `,
-     directives: [TodoDetailComponent]
+     // Other directives, injected
+     directives: [TodoDetailComponent, TodoEditComponent],
+     // Used services, Injected 
+     providers: [TodoService]
 })
-export class TodoComponent {
-    public tasks = TASKS;
+export class TodoComponent  implements OnInit {
+    public tasks : Task[];
     public editTask : Task;
     public selectedTask : Task;
+    private _todoService : TodoService;
+    
+    constructor(todoService: TodoService) { 
+        this._todoService = todoService;
+    }
+    
+    private getTasks () {
+        this._todoService.getTasks().then(tasks => this.tasks = tasks);
+    }
+    
+    public ngOnInit() {
+        this.getTasks();
+    }
     
     public edit (task: Task) {
         console.log("Task selected: " + task);
@@ -59,8 +71,3 @@ export class TodoComponent {
 
 }
 
-var TASKS: Task[] = [
-      {id: 1, name: 'Finish this sample', done: false},
-      {id: 2, name: 'Prepare meal', done: false},
-      {id: 3, name: 'Play with Josu', done: false},
-];
