@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
 import {Task} from "./task";
+import {TodoDetailComponent} from "./todo-detail.component";
 
 /**
  * Changes in stage 2 - hero editor
@@ -17,13 +18,7 @@ import {Task} from "./task";
                     <div><input type="checkbox" [(ngModel)]="editTask.done" ></div>
                     <button (onclick)="update(editTask)">Save</button>
                 </div>
-                <div *ngIf="selectedTask">
-                    <h2>{{selectedTask.name}}</h2>
-                    <div>Id: {{selectedTask.id}}</div>
-                    <div>Done: {{selectedTask.done}}</div>
-                    <button (click)="edit(selectedTask)">Edit</button>
-                    <button (click)="delete(selectedTask)">Delete</button>
-                    </div>              
+                <todo-detail [task]="selectedTask"></todo-detail>        
                 <h2>My Tasks</h2>
                 <ul class="tasks">
                 <li *ngFor="#task of tasks" [class.selected]="task === selectedTask">
@@ -32,7 +27,8 @@ import {Task} from "./task";
                     <button (click)="edit(task)">Edit</button>
                 </li>
                 </ul>
-                `
+                `,
+     directives: [TodoDetailComponent]
 })
 export class TodoComponent {
     public tasks = TASKS;
