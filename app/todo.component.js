@@ -32,7 +32,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 TodoComponent = __decorate([
                     core_1.Component({
                         selector: "todo",
-                        template: "<h1>Todo task {{task.id}}</h1><p>{{task.string}}</p>Is it done? {{task.done}}"
+                        template: "<h1>Todo task {{task.id}}</h1>\n                <p>{{task.name}}</p>\n                Is it done? {{task.done}}\n                <div>\n                <h2>Edit</h2>\n                <div><label>Task: </label></div>\n                <div><input [(ngModel)]=\"task.name\" placeholder=\"Task name\"></div>\n                <div><label for=\"done\">Done: </label></div>\n                <div><input type=\"checkbox\" id=\"done\" [(ngModel)]=\"task.done\" ></div>\n                </div>\n                "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], TodoComponent);

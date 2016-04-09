@@ -14,6 +14,7 @@ import {TodoComponent} from './todo.component';
     template: `<h1>{{title}}</h1>
                 <nav>
                 <ul>
+                     <li><a href="/">Home</a></li>
                      <li><a [routerLink]="['HttpSample']">Http Sample</a></li>
                      <li><a [routerLink]="['TodoComponent']">Todo sample</a></li>
                 </ul>
