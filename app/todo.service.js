@@ -33,6 +33,9 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 TodoService.prototype.getTasks = function () {
                     return Promise.resolve(this.tasks);
                 };
+                TodoService.prototype.getTask = function (id) {
+                    return Promise.resolve(this.tasks).then(function (tasks) { return tasks.filter(function (task) { return task.id === id; })[0]; });
+                };
                 /**
                  * The same with some latency added
                  */
@@ -44,6 +47,18 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                      // 1 second
                     );
                 };
+                /**
+               * The same with some latency added
+               */
+                TodoService.prototype.updateTask = function (updatedTask) {
+                    return Promise.resolve(this.tasks).then(function (tasks) { return tasks.filter(function (task) { return task.id === updatedTask.id; })[0] = updatedTask; });
+                };
+                /**
+                * The same with some latency added
+                */
+                TodoService.prototype.saveTask = function (task) {
+                    return Promise.resolve(this.tasks).then(function (tasks) { return tasks.push(task); });
+                };
                 TodoService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])
@@ -54,7 +69,9 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             TASKS = [
                 { id: 1, name: 'Finish this sample', done: false },
                 { id: 2, name: 'Prepare meal', done: false },
-                { id: 3, name: 'Play with Josu', done: false },
+                { id: 3, name: 'Play with friends', done: false },
+                { id: 4, name: 'Run to the hills', done: false },
+                { id: 5, name: 'Lear Ionic2', done: false }
             ];
         }
     }

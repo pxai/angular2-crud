@@ -63,11 +63,13 @@ System.register(["angular2/core", "./todo-detail.component", "./todo-edit.compon
                 TodoComponent = __decorate([
                     core_1.Component({
                         selector: "todo",
-                        template: "<h1>Todo tasks app</h1>\n\n                <todo-detail [task]=\"selectedTask\"></todo-detail>        \n                <todo-edit [task]=\"editTask\"></todo-edit>        \n                <h2>My Tasks</h2>\n                <ul class=\"tasks\">\n                <li *ngFor=\"#task of tasks\" [class.selected]=\"task === selectedTask\">\n                    <span (click)=\"edit(task)\"><strong>{{task.name}}</strong> {{task.done}}</span>\n                    <button (click)=\"detail(task)\">Detail</button>\n                    <button (click)=\"edit(task)\">Edit</button>\n                </li>\n                </ul>\n                ",
+                        template: "<h1>Todo tasks app</h1>   \n                <h2>My Tasks</h2>\n                <ul class=\"tasks\">\n                <li *ngFor=\"#task of tasks\" [class.selected]=\"task === selectedTask\">\n                    <span (click)=\"edit(task)\"><strong>{{task.name}}</strong> {{task.done}}</span>\n                    <button (click)=\"detail(task)\">Detail</button>\n                    <button (click)=\"edit(task)\">Edit</button>\n                </li>\n                </ul>\n                ",
                         // Other directives, injected
                         directives: [todo_detail_component_1.TodoDetailComponent, todo_edit_component_1.TodoEditComponent],
                         // Used services, Injected 
-                        providers: [todo_service_1.TodoService]
+                        providers: [todo_service_1.TodoService],
+                        // Optional styles
+                        styleUrls: ['style.css']
                     }), 
                     __metadata('design:paramtypes', [todo_service_1.TodoService])
                 ], TodoComponent);

@@ -1,4 +1,4 @@
-System.register(["angular2/core"], function(exports_1, context_1) {
+System.register(["angular2/core", 'angular2/router', './todo.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,18 @@ System.register(["angular2/core"], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, router_1, todo_service_1;
     var TodoDetailComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (todo_service_1_1) {
+                todo_service_1 = todo_service_1_1;
             }],
         execute: function() {
             /**
@@ -23,18 +29,26 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             * Using a service to take care of the server interaction
             */
             TodoDetailComponent = (function () {
-                function TodoDetailComponent() {
+                function TodoDetailComponent(todoService, routeParams) {
+                    this._todoService = todoService;
+                    this._routeParams = routeParams;
                 }
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], TodoDetailComponent.prototype, "task", void 0);
+                TodoDetailComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    var id = +this._routeParams.get('id');
+                    this._todoService.getTask(id)
+                        .then(function (task) { return _this.task = task; });
+                };
+                TodoDetailComponent.prototype.goBack = function (e) {
+                    window.history.back();
+                };
                 TodoDetailComponent = __decorate([
                     core_1.Component({
                         selector: "todo-detail",
-                        template: "<div *ngIf=\"task\">\n                    <h2>{{task.name}}</h2>\n                    <div>Id: {{task.id}}</div>\n                    <div>Done: {{task.done}}</div>\n                    <button (click)=\"edit(task)\">Edit</button>\n                    <button (click)=\"delete(task)\">Delete</button>\n               </div>"
+                        template: "<div *ngIf=\"task\">\n                    <h2>{{task.name  | uppercase }}</h2>\n                    <div>Id: {{task.id}}</div>\n                    <div>Done: {{task.done}}</div>\n                    <button (click)=\"edit(task)\">Edit</button>\n                    <button (click)=\"delete(task)\">Delete</button>\n               </div>\n               <a href=\"\" (click)=\"goBack(e)\">Back</a>",
+                        providers: [todo_service_1.TodoService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [todo_service_1.TodoService, router_1.RouteParams])
                 ], TodoDetailComponent);
                 return TodoDetailComponent;
             }());
