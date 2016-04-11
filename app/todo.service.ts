@@ -54,7 +54,14 @@ export class TodoService {
   
    public deleteTask(id: number) {
     return Promise.resolve(this.tasks).then(
-        tasks => tasks.filter(task => task.id === id)[0] = null
+        //tasks => tasks.filter(task => task.id === id)[0] = null
+        tasks => {
+            for (var i = 0; i < this.tasks.length; i++) {
+                if (this.tasks[i].id == id) {
+                    this.tasks.splice(i,1);
+                }
+            }
+        }
     );
   }
 }
