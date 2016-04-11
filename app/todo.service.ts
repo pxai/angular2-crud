@@ -51,6 +51,12 @@ export class TodoService {
         tasks => tasks.push(task)
     );
   }
+  
+   public deleteTask(id: number) {
+    return Promise.resolve(this.tasks).then(
+        tasks => tasks.filter(task => task.id === id)[0] = null
+    );
+  }
 }
 
 var TASKS: Task[] = [
