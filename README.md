@@ -31,6 +31,10 @@ And this runs a little web server with a rest API
 ```
 npm rest
 ```
+Or directly:
+```
+node restserver
+```
 
 ## About
 Pello Altadill[http://pello.io]
