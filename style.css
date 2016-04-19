@@ -2,6 +2,10 @@
 * style.css
 * Some custom styles for angular2 classes
 */
+html, body {
+    font-family: helvetica, arial, verdana;
+}
+
 .ng-touched.ng-invalid {
     background-color: lightsalmon;
 }
